@@ -3,15 +3,19 @@ export default class Slider {
     wrapper = null,
     btns = null,
     prev = null,
-    next = null
+    next = null,
+    activeClass = null,
+    autoplay = null,
   } = {}) {
     
     this.wrapper = document.querySelector(wrapper);
-    this.prev = this.wrapper.querySelector(prev);
-    this.next = this.wrapper.querySelector(next);
+    this.prev = document.querySelector(prev);
+    this.next = document.querySelector(next);
     this.item = this.wrapper.children;
     this.btns = document.querySelectorAll(btns);
     this.sliderIndex = 1;
     this.teacherBlock = document.querySelector('.hanson');
+    this.activeClass = activeClass;
+    this.autoplay = autoplay;
   }
 }
