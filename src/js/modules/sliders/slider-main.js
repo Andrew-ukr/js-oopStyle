@@ -1,12 +1,10 @@
-export default class Slider {
-  constructor(sliderBody, SliderBtn) {
-    this.body = document.querySelector(sliderBody);
-    this.item = this.body.children;
-    this.btns = document.querySelectorAll(SliderBtn);
-    this.sliderIndex = 1;
-    this.teacherBlock = document.querySelector('.hanson');
-  }
+import Slider from "./slider";
 
+export default class MainSlider extends Slider {
+  constructor(wrapper, btns) {
+    super(wrapper, btns);
+  }
+  
   showCurentIndex() {
     if (this.sliderIndex > this.item.length) {
       this.sliderIndex = 1;
@@ -33,9 +31,8 @@ export default class Slider {
     if (this.item[2].style.display === 'block') {
       setTimeout(() => {
         this.teacherBlock.style.display = 'block';
-        console.log('111');
       }, 3000);
-    } 
+    }
   }
 
   launchSlider() {
@@ -58,7 +55,6 @@ export default class Slider {
         this.hideSlide();
       });
     });
-
-
   }
+
 }

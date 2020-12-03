@@ -1,13 +1,15 @@
-import Slider from './modules/slider';
+import MainSlider from './modules/sliders/slider-main';
 import PlayVideo from './modules/playVideo.js';
 
 window.addEventListener('DOMContentLoaded', () => {
-'use strict';
+  'use strict';
 
-const slider = new Slider('.page', '.next');
-slider.launchSlider();
+  const sliderMain = new MainSlider({
+    wrapper: ".page", 
+    btns: '.next',
+  });
+  sliderMain.launchSlider();
 
-const play = new PlayVideo('.play', '.overlay');
-play.launchPlayer();
-
+  const play = new PlayVideo('.play', '.overlay');
+  play.launchPlayer();
 });
