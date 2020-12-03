@@ -45,24 +45,36 @@ export default class MiniSlider extends Slider {
     } catch (error) {}
   }
 
-  startAutoPlay() {
+  startAutoPlay(area) {
     if (this.autoplay) {
-      let interval = setInterval(() => {
+      this.interval = setInterval(() => {
         this.wrapper.append(this.item[0]);
         this.activeItem();
-        console.log('start interval');
       }, this.autoplay);
-
-      this.wrapper.addEventListener('mouseover', () => {
-        console.log('clear');
-        clearInterval(interval);
+      
+      area.addEventListener('mouseover', () => {
+        clearInterval(this.interval);
       });
 
-      this.wrapper.addEventListener('mouseout', () => {
-        interval = setInterval(() => {
+      area.addEventListener('mouseout', () => {
+        this.interval = setInterval(() => {
+          area.append(this.item[0]);
+          this.activeItem();
+        }, this.autoplay);
+      });
+    }
+  }
+
+  stopAutoPlay(area) {
+    if (this.autoplay) {
+      area.addEventListener('mouseover', () => {
+        clearInterval(this.interval);
+      });
+
+      area.addEventListener('mouseout', () => {
+        this.interval = setInterval(() => {
           this.wrapper.append(this.item[0]);
           this.activeItem();
-          console.log('out');
         }, this.autoplay);
       });
     }
@@ -72,6 +84,8 @@ export default class MiniSlider extends Slider {
     this.init();
     this.btnAction();
     this.activeItem();
-    this.startAutoPlay();
+    this.startAutoPlay(this.wrapper);
+    this.stopAutoPlay(this.prev);
+    this.stopAutoPlay(this.next);
   }
 }

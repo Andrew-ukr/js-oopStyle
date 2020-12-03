@@ -17,5 +17,6 @@ export default class Slider {
     this.teacherBlock = document.querySelector('.hanson');
     this.activeClass = activeClass;
     this.autoplay = autoplay;
+    this.interval = '';
   }
 }

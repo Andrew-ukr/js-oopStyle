@@ -3155,29 +3155,42 @@ function (_Slider) {
     }
   }, {
     key: "startAutoPlay",
-    value: function startAutoPlay() {
+    value: function startAutoPlay(area) {
       var _this3 = this;
 
       if (this.autoplay) {
-        var interval = setInterval(function () {
+        this.interval = setInterval(function () {
           _this3.wrapper.append(_this3.item[0]);
 
           _this3.activeItem();
-
-          console.log('start interval');
         }, this.autoplay);
-        this.wrapper.addEventListener('mouseover', function () {
-          console.log('clear');
-          clearInterval(interval);
+        area.addEventListener('mouseover', function () {
+          clearInterval(_this3.interval);
         });
-        this.wrapper.addEventListener('mouseout', function () {
-          interval = setInterval(function () {
-            _this3.wrapper.append(_this3.item[0]);
+        area.addEventListener('mouseout', function () {
+          _this3.interval = setInterval(function () {
+            area.append(_this3.item[0]);
 
             _this3.activeItem();
-
-            console.log('out');
           }, _this3.autoplay);
+        });
+      }
+    }
+  }, {
+    key: "stopAutoPlay",
+    value: function stopAutoPlay(area) {
+      var _this4 = this;
+
+      if (this.autoplay) {
+        area.addEventListener('mouseover', function () {
+          clearInterval(_this4.interval);
+        });
+        area.addEventListener('mouseout', function () {
+          _this4.interval = setInterval(function () {
+            _this4.wrapper.append(_this4.item[0]);
+
+            _this4.activeItem();
+          }, _this4.autoplay);
         });
       }
     }
@@ -3187,7 +3200,9 @@ function (_Slider) {
       this.init();
       this.btnAction();
       this.activeItem();
-      this.startAutoPlay();
+      this.startAutoPlay(this.wrapper);
+      this.stopAutoPlay(this.prev);
+      this.stopAutoPlay(this.next);
     }
   }]);
 
@@ -3236,6 +3251,7 @@ var Slider = function Slider() {
   this.teacherBlock = document.querySelector('.hanson');
   this.activeClass = activeClass;
   this.autoplay = autoplay;
+  this.interval = '';
 };
 
 
