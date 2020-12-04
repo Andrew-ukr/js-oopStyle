@@ -2763,6 +2763,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_sliders_slider_main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/sliders/slider-main */ "./src/js/modules/sliders/slider-main.js");
 /* harmony import */ var _modules_sliders_slider_mini__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/sliders/slider-mini */ "./src/js/modules/sliders/slider-mini.js");
 /* harmony import */ var _modules_playVideo_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/playVideo.js */ "./src/js/modules/playVideo.js");
+/* harmony import */ var _modules_difference__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/difference */ "./src/js/modules/difference.js");
+
 
 
 
@@ -2798,7 +2800,86 @@ window.addEventListener('DOMContentLoaded', function () {
   sliderFeed.launchSlider();
   var play = new _modules_playVideo_js__WEBPACK_IMPORTED_MODULE_2__["default"]('.play', '.overlay');
   play.launchPlayer();
+  var differenceBlockOld = new _modules_difference__WEBPACK_IMPORTED_MODULE_3__["default"]('.officerold', '.officer__card-item', '.card__click');
+  differenceBlockOld.run();
+  var differenceBlockNew = new _modules_difference__WEBPACK_IMPORTED_MODULE_3__["default"]('.officernew', '.officer__card-item', '.card__click');
+  differenceBlockNew.run();
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/difference.js":
+/*!**************************************!*\
+  !*** ./src/js/modules/difference.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Difference; });
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Difference =
+/*#__PURE__*/
+function () {
+  function Difference(blockName, blockItem, btn) {
+    _classCallCheck(this, Difference);
+
+    this.blockName = document.querySelector(blockName);
+    this.blockItem = this.blockName.querySelectorAll(blockItem);
+    this.btn = this.blockName.querySelector(btn);
+  }
+
+  _createClass(Difference, [{
+    key: "init",
+    value: function init() {
+      this.blockItem.forEach(function (elem) {
+        elem.style.display = 'none';
+      });
+      this.blockItem[this.blockItem.length - 1].style.display = 'flex';
+    }
+  }, {
+    key: "clickAction",
+    value: function clickAction() {
+      var _this = this;
+
+      var counter = 0;
+      this.btn.addEventListener('click', function () {
+        if (_this.blockItem.length - 2 === counter) {
+          _this.blockItem[_this.blockItem.length - 1].style.display = 'none';
+          _this.blockItem[counter].style.display = 'flex';
+
+          _this.blockItem[counter].classList.add('animated', 'fadeIn');
+        } else {
+          _this.blockItem[counter].style.display = 'flex';
+
+          _this.blockItem[counter].classList.add('animated', 'fadeIn');
+
+          counter++;
+        }
+      });
+    }
+  }, {
+    key: "run",
+    value: function run() {
+      this.init();
+      this.clickAction();
+    }
+  }]);
+
+  return Difference;
+}();
+
+
 
 /***/ }),
 
