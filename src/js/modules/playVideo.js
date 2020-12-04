@@ -1,6 +1,6 @@
 export default class PlayVideo {
   constructor(playBtn, overlay) {
-    this.playBtn = document.querySelector(playBtn);
+    this.playBtn = document.querySelectorAll(playBtn);
     this.overlayBlock = document.querySelector(overlay);
     this.closeBtn = this.overlayBlock.querySelector('.close');
   }
@@ -14,13 +14,15 @@ export default class PlayVideo {
   }
 
   open() {
-    this.playBtn.addEventListener('click', () => {
-      let ytId = this.playBtn.getAttribute('data-url');
-      this.overlayBlock.style.display = 'flex';
-      
-      if (!document.querySelector('iframe#frame')) {
-        this.createPlayer(ytId);
-      }
+    this.playBtn.forEach(item => {
+      item.addEventListener('click', () => {
+        let ytId = item.getAttribute('data-url');
+        this.overlayBlock.style.display = 'flex';
+        
+        if (!document.querySelector('iframe#frame')) {
+          this.createPlayer(ytId);
+        }
+      });
     });
   }
 

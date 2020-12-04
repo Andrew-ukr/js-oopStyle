@@ -13,6 +13,13 @@ window.addEventListener('DOMContentLoaded', () => {
   });
   sliderMain.launchSlider();
 
+  const sliderMainModules = new MainSlider({
+    wrapper: ".moduleapp", 
+    btns: '.next',
+    btnsPrev: '.prev',
+  });
+  sliderMainModules.launchSlider();
+
   const sliderShowUp = new MiniSlider({
     wrapper: ".showup__content-slider", 
     prev: '.showup__prev',
@@ -40,6 +47,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const play = new PlayVideo('.play', '.overlay');
   play.launchPlayer();
+
 
   const differenceBlockOld = new Difference('.officerold', '.officer__card-item', '.card__click');
   differenceBlockOld.run();
