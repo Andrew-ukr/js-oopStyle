@@ -2,6 +2,7 @@ import MainSlider from './modules/sliders/slider-main';
 import MiniSlider from './modules/sliders/slider-mini';
 import PlayVideo from './modules/playVideo.js';
 import Difference from './modules/difference';
+import Form from './modules/form';
 
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
@@ -45,4 +46,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const differenceBlockNew = new Difference('.officernew', '.officer__card-item', '.card__click');
   differenceBlockNew.run();
+
+  new Form('form', './assets/question.php').run();
 });
